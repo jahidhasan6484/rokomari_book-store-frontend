@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import './Navbar.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/rokomari_logo.png';
-const Navbar = () => {
 
+const Navbar = () => {
   let time = '';
   const [localTime, setLocalTime] = useState(time)
 
@@ -119,24 +120,91 @@ const Navbar = () => {
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-gear " viewBox="0 0 16 16">
               <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
             </svg>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <Link to="/">
+              <img src={logo} className="logo" alt='Rokomai Logo' />
+            </Link>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  লেখক
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">হুমায়ূন আহমেদ</a></li>
+                  <li><a class="dropdown-item" href="#">মুহম্মদ জাফর ইকবাল</a></li>
+                  <li><a class="dropdown-item" href="#">তামিম শাহরিয়ার সুবিন</a></li>
+                  <li><a class="dropdown-item" href="#">হুমায়ুন আজাদ</a></li>
+                  <li><a class="dropdown-item" href="#">জহির রায়হান</a></li>
+                  <li><a class="dropdown-item" href="#">মানিক বন্দ্যোপাধ্যায়</a></li>
+                  <li><a class="dropdown-item" href="#">বিভূতিভূষণ বন্দ্যোপাধ্যায়</a></li>
+                  <li><a class="dropdown-item" href="#">সৈয়দ মুজতবা আলী</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  বিষয়
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <Link to="/novel" class="nav-link">উপন্যাস</Link>
+                  </li>
+                  <li><a class="dropdown-item" href="#">শিশু-কিশোর বই</a></li>
+                  <li><a class="dropdown-item" href="#">সায়েন্স ফিকশন</a></li>
+                  <li><a class="dropdown-item" href="#">ভর্তি, নিয়োগ ও প্রস্তুতি পরীক্ষা</a></li>
+                  <li><a class="dropdown-item" href="#">গল্প</a></li>
+                  <li><a class="dropdown-item" href="#">গণিত, বিজ্ঞান ও প্রযুক্তি</a></li>
+                  <li><a class="dropdown-item" href="#">ইতিহাস ও ঐতিহ্য</a></li>
+                  <li><a class="dropdown-item" href="#">মুক্তিযুদ্ধ</a></li>
+                  <li><a class="dropdown-item" href="#">ইঞ্জিনিয়ারিং</a></li>
+                  <li><a class="dropdown-item" href="#">মেডিকেল</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  প্রকাশনী
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">বাংলা একাডেমি</a></li>
+                  <li><a class="dropdown-item" href="#">ইসলামিক ফাউন্ডেশন</a></li>
+                  <li><a class="dropdown-item" href="#">জয়কলি পাবলিকেশন্স লিঃ</a></li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <Link to="/bookFair22" class="nav-link">বইমেলা ২০২২</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/islamicBook" class="nav-link">ইসলামি বই</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/freelancing_Programming" class="nav-link">ফ্রিল্যান্সিং/প্রোগ্রামিং</Link>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">উপন্যাস</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">ই-বুক</a>
+              </li>
+            </ul>
+            <form class="d-flex mt-3" role="search">
+
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
           </div>
         </div>
       </header>
-
-      <div class="navigation">
-          <a class="p-2 link-secondary" href="#">World</a>
-          <a class="p-2 link-secondary" href="#">U.S.</a>
-          <a class="p-2 link-secondary" href="#">Technology</a>
-          <a class="p-2 link-secondary" href="#">Design</a>
-          <a class="p-2 link-secondary" href="#">Culture</a>
-          <a class="p-2 link-secondary" href="#">Business</a>
-          <a class="p-2 link-secondary" href="#">Politics</a>
-          <a class="p-2 link-secondary" href="#">Opinion</a>
-          <a class="p-2 link-secondary" href="#">Science</a>
-          <a class="p-2 link-secondary" href="#">Health</a>
-          <a class="p-2 link-secondary" href="#">Style</a>
-          <a class="p-2 link-secondary" href="#">Travel</a>
-      </div>
     </div>
   )
 }

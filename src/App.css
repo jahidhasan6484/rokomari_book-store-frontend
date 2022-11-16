@@ -27,9 +27,9 @@
     font-weight: 600;
 }
 
-.blog-header{
+.blog-header {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -40,6 +40,12 @@
     text-align: center;
 }
 
-.navigation::-webkit-scrollbar {
+nav {
+    overflow-x: scroll;
+
+}
+
+.nav::-webkit-scrollbar {
     display: none;
-  }
+}
+
