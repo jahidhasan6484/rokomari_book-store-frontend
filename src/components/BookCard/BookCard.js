@@ -1,5 +1,9 @@
+import { useContext } from 'react';
+import { CartContext } from '../../App';
 import './BookCard.css';
 const BookCard = ({ book }) => {
+    const [cart, setCart, booksList] = useContext(CartContext);
+
     const convertedPrice = (_price) => {
         let tempPrice = String(_price).split("");
         let result = [];
@@ -24,13 +28,28 @@ const BookCard = ({ book }) => {
         return result.join("");
     }
 
+    const handleAddToCart = (_book) => {
+        const productExist = cart.find((item) => item.id === _book.id);
+
+        if (productExist) {
+            alert("Already added to the cart")
+        } else {
+            let tempCart = [...cart]
+            tempCart.push(_book)
+            localStorage.setItem("cart", JSON.stringify(tempCart))
+
+            setCart(tempCart)
+        }
+    }
+
     return (
-        <div className="col-md-2 book_col">
+        <div className="col-md-2 col-6 book_col">
             <div className='book_card'>
                 <img src={book.imageURL}></img>
                 <p className='mt-3'><b>{book.name}</b></p>
                 <p>লেখক: <b>{book.authorName}</b></p>
                 <p>মূল্য: <del>{convertedPrice(book.prePrice)}</del> {convertedPrice(book.currPrice)} টাকা</p>
+                <button className="btn btn-dark" onClick={() => handleAddToCart(book)}>Add to cart</button>
             </div>
         </div>
     )

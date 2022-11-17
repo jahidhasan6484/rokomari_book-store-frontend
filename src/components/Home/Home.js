@@ -8,7 +8,7 @@ import Books from '../Books/Books';
 
 const Home = () => {
     return (
-        <>
+        <div className="section">
             <div id="carouselExampleIndicators" className="carousel slide mt-2" data-bs-ride="true">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
@@ -47,7 +47,7 @@ const Home = () => {
                 </button>
             </div>
             <Books />
-        </>
+        </div>
     )
 }
 

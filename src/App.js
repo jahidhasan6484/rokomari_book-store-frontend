@@ -8,6 +8,7 @@ import Home from './components/Home/Home';
 import Programming from './components/Programming/Programming';
 import Islamic from './components/Islamic/Islamic';
 import Novel from './components/Novel/Novel';
+import Cart from './components/Cart/Cart';
 
 
 export const CartContext = createContext();
@@ -34,6 +35,7 @@ function App() {
         <Route path="/freelancing_Programming" element={<Programming />} />
         <Route path="/islamicBook" element={<Islamic />} />
         <Route path="/novel" element={<Novel />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </CartContext.Provider>
   );

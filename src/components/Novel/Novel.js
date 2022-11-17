@@ -5,8 +5,8 @@ import BookCard from "../BookCard/BookCard";
 const Novel = () => {
     const [cart, setCart, booksList] = useContext(CartContext);
     return (
-        <div className="container">
-            <h1>Novel</h1>
+        <div className="container section">
+            <h4 className="title">উপন্যাস</h4>
             <div className="row">
                 {
                     booksList.map((book) => {
