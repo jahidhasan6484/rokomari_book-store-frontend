@@ -149,7 +149,7 @@ const Cart = () => {
                                                 </div>
                                                 <div className="col-md-2 col-2">
                                                     <div className="col-md-8 col-8">
-                                                        {convertedPrice(item.currPrice * item.quantity)}
+                                                    ৳ {convertedPrice(item.currPrice * item.quantity)}
                                                     </div>
                                                 </div>
                                                 <div className="col-md-2 col-2">
@@ -178,7 +178,7 @@ const Cart = () => {
                                     </div>
                                     <div className="details">
                                         <p>কুরিয়ার ফি:</p>
-                                        <p>৳ {convertedPrice(courierCharge)}</p>
+                                        <p>৳ {courierCharge ? convertedPrice(courierCharge) : convertedPrice(0)}</p>
                                     </div>
                                 </div>
 

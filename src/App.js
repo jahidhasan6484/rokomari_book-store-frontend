@@ -5,10 +5,9 @@ import data from './components/Data/Data';
 
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
-import Programming from './components/Programming/Programming';
-import Islamic from './components/Islamic/Islamic';
-import Novel from './components/Novel/Novel';
 import Cart from './components/Cart/Cart';
+import Author from './components/Author/Author';
+import Category from './components/Category/Category';
 
 
 export const CartContext = createContext();
@@ -32,10 +31,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/freelancing_Programming" element={<Programming />} />
-        <Route path="/islamicBook" element={<Islamic />} />
-        <Route path="/novel" element={<Novel />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/author/:name" element={<Author />} />
+        <Route path="/category/:category" element={<Category />} />
       </Routes>
     </CartContext.Provider>
   );

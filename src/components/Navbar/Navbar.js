@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/rokomari_logo.png';
@@ -106,24 +106,24 @@ const Navbar = () => {
     let result = [];
 
     const numberMap = {
-        0: "০",
-        1: "১",
-        2: "২",
-        3: "৩",
-        4: "৪",
-        5: "৫",
-        6: "৬",
-        7: "৭",
-        8: "৮",
-        9: "৯",
+      0: "০",
+      1: "১",
+      2: "২",
+      3: "৩",
+      4: "৪",
+      5: "৫",
+      6: "৬",
+      7: "৭",
+      8: "৮",
+      9: "৯",
     }
 
     for (let i = 0; i < tempItemLength.length; i++) {
-        result.push(numberMap[tempItemLength[i]])
+      result.push(numberMap[tempItemLength[i]])
     }
 
     return result.join("");
-}
+  }
 
   return (
     <div class="fixed-top bg-light border-bottom">
@@ -140,11 +140,11 @@ const Navbar = () => {
           <div class="col-md-4 col-6 d-flex justify-content-end align-items-center gap-3">
             <div className='cart'>
               <Link to="/cart">
-              <p className='cartItemCount'>{convertedCartItem(cart.length)}</p>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-              </svg>
-              
+                <p className='cartItemCount'>{convertedCartItem(cart.length)}</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                </svg>
+
               </Link>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-gear " viewBox="0 0 16 16">
@@ -172,14 +172,21 @@ const Navbar = () => {
                   লেখক
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">হুমায়ূন আহমেদ</a></li>
-                  <li><a class="dropdown-item" href="#">মুহম্মদ জাফর ইকবাল</a></li>
-                  <li><a class="dropdown-item" href="#">তামিম শাহরিয়ার সুবিন</a></li>
-                  <li><a class="dropdown-item" href="#">হুমায়ুন আজাদ</a></li>
-                  <li><a class="dropdown-item" href="#">জহির রায়হান</a></li>
-                  <li><a class="dropdown-item" href="#">মানিক বন্দ্যোপাধ্যায়</a></li>
-                  <li><a class="dropdown-item" href="#">বিভূতিভূষণ বন্দ্যোপাধ্যায়</a></li>
-                  <li><a class="dropdown-item" href="#">সৈয়দ মুজতবা আলী</a></li>
+                  <li>
+                    <Link to={`/author/${"হুমায়ূন আহমেদ"}`} class="nav-link">হুমায়ূন আহমেদ</Link>
+                  </li>
+                  <li>
+                    <Link to={`/author/${"মুহম্মদ জাফর ইকবাল"}`} class="nav-link">মুহম্মদ জাফর ইকবাল</Link>
+                  </li>
+                  <li>
+                    <Link to={`/author/${"তামিম শাহরিয়ার সুবিন"}`} class="nav-link">তামিম শাহরিয়ার সুবিন</Link>
+                  </li>
+                  <li>
+                    <Link to={`/author/${"শরৎচন্দ্র চট্টোপাধ্যায়"}`} class="nav-link">শরৎচন্দ্র চট্টোপাধ্যায়</Link>
+                  </li>
+                  <li>
+                    <Link to={`/author/${"ঝংকার মাহবুব"}`} class="nav-link">ঝংকার মাহবুব</Link>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -188,51 +195,32 @@ const Navbar = () => {
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <Link to="/novel" class="nav-link">উপন্যাস</Link>
+                    <Link to={`/category/${"উপন্যাস"}`} class="nav-link">উপন্যাস</Link>
                   </li>
-                  <li><a class="dropdown-item" href="#">শিশু-কিশোর বই</a></li>
-                  <li><a class="dropdown-item" href="#">সায়েন্স ফিকশন</a></li>
-                  <li><a class="dropdown-item" href="#">ভর্তি, নিয়োগ ও প্রস্তুতি পরীক্ষা</a></li>
-                  <li><a class="dropdown-item" href="#">গল্প</a></li>
-                  <li><a class="dropdown-item" href="#">গণিত, বিজ্ঞান ও প্রযুক্তি</a></li>
-                  <li><a class="dropdown-item" href="#">ইতিহাস ও ঐতিহ্য</a></li>
-                  <li><a class="dropdown-item" href="#">মুক্তিযুদ্ধ</a></li>
-                  <li><a class="dropdown-item" href="#">ইঞ্জিনিয়ারিং</a></li>
-                  <li><a class="dropdown-item" href="#">মেডিকেল</a></li>
-                  <li><a class="dropdown-item" href="#">রাজনীতি</a></li>
+                  <li>
+                    <Link to={`/category/${"শিশু-কিশোর বই"}`} class="nav-link">শিশু-কিশোর বই</Link>
+                  </li>
+                  <li>
+                    <Link to={`/category/${"সায়েন্স ফিকশন"}`} class="nav-link">সায়েন্স ফিকশন</Link>
+                  </li>
+                  <li class="nav-item">
+                    <Link to={`/category/${"ইসলামি বই"}`} class="nav-link">ইসলামি বই</Link>
+                  </li>
+                  <li>
+                    <Link to={`/category/${"ইঞ্জিনিয়ারিং"}`} class="nav-link">ইঞ্জিনিয়ারিং</Link>
+                  </li>
+                  <li>
+                    <Link to={`/category/${"মেডিকেল"}`} class="nav-link">মেডিকেল</Link>
+                  </li>
+                  <li>
+                    <Link to={`/category/${"রাজনীতি"}`} class="nav-link">রাজনীতি</Link>
+                  </li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  প্রকাশনী
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">বাংলা একাডেমি</a></li>
-                  <li><a class="dropdown-item" href="#">ইসলামিক ফাউন্ডেশন</a></li>
-                  <li><a class="dropdown-item" href="#">জয়কলি পাবলিকেশন্স লিঃ</a></li>
-                </ul>
-              </li>
-
-              <li class="nav-item">
-                <Link to="/bookFair22" class="nav-link">বইমেলা ২০২২</Link>
-              </li>
-              <li class="nav-item">
-                <Link to="/islamicBook" class="nav-link">ইসলামি বই</Link>
-              </li>
-              <li class="nav-item">
-                <Link to="/freelancing_Programming" class="nav-link">ফ্রিল্যান্সিং/প্রোগ্রামিং</Link>
-              </li>
-              <li class="nav-item">
-                <Link to="/novel" class="nav-link">উপন্যাস</Link>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">ই-বুক</a>
+              <li>
+                <Link to={`/category/${"কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং"}`} class="nav-link">কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং</Link>
               </li>
             </ul>
-            <form class="d-flex mt-3" role="search">
-
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
       </header>

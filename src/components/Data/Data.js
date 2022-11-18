@@ -83,6 +83,102 @@ const data = {
             quantity: 1,
             publisher: "রাইয়ান প্রকাশন",
             edition: "২০২১"
+        },
+        {
+            id: "8",
+            name: "ডিপ্লোমা ফার্মাকোলজি",
+            authorName: "ডা. মো: আব্দুল মান্নান",
+            category: "মেডিকেল",
+            prePrice: 350,
+            currPrice: 228,
+            imageURL: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/e493a717d_191810.jpg",
+            quantity: 1,
+            publisher: "পেঙ্গুইন লাইব্রেরী",
+            edition: "২০২১"
+        },
+        {
+            id: "9",
+            name: "নবিজি: যার আদর্শে বিমোহিত পৃথিবী",
+            authorName: "ড. রাগিব সারজানি",
+            category: "ইসলামি বই",
+            prePrice: 720,
+            currPrice: 450,
+            imageURL: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/ea5e93f10_205545.jpg",
+            quantity: 1,
+            publisher: "মুহাম্মদ পাবলিকেশন",
+            edition: "২০২০"
+        },
+        {
+            id: "10",
+            name: "দেয়াল",
+            authorName: "হুমায়ূন আহমেদ",
+            category: "উপন্যাস",
+            prePrice: 450,
+            currPrice: 387,
+            imageURL: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/1b3707c61_62834.jpg",
+            quantity: 1,
+            publisher: "অন্যপ্রকাশ",
+            edition: "২০১৪"
+        }, 
+        {
+            id: "11",
+            name: "পাইথন দিয়ে প্রোগ্রামিং শেখা",
+            authorName: "তামিম শাহরিয়ার সুবিন",
+            category: "কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং",
+            prePrice: 250,
+            currPrice: 215,
+            imageURL: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/dfb303496d64_143309.jpg",
+            quantity: 1,
+            publisher: "দ্বিমিক প্রকাশনী",
+            edition: "২০১৭"
+        }, 
+        {
+            id: "12",
+            name: "আমার ডেঞ্জারাস মামী",
+            authorName: "মুহম্মদ জাফর ইকবাল",
+            category: "শিশু-কিশোর বই",
+            prePrice: 300,
+            currPrice: 258,
+            imageURL: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Amar_Dangerous_Mami-Muhammod_Zafar_Iqbal-e7397-219508.jpg",
+            quantity: 1,
+            publisher: "জ্ঞানকোষ প্রকাশনী",
+            edition: "২০২১"
+        }, 
+        {
+            id: "13",
+            name: "হিমু",
+            authorName: "হুমায়ূন আহমেদ",
+            category: "উপন্যাস",
+            prePrice: 180,
+            currPrice: 159,
+            imageURL: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/0e743778fca4_1277.gif",
+            quantity: 1,
+            publisher: "প্রতীক প্রকাশনা সংস্থা",
+            edition: "২০১২"
+        },
+        {
+            id: "14",
+            name: "হাতে কলমে জাভাস্ক্রিপ্ট",
+            authorName: "জুনায়েদ আহমেদ",
+            category: "কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং",
+            prePrice: 425,
+            currPrice: 374,
+            imageURL: "https://ds.rokomari.store/rokomari110/ProductNew20190903/130X186/e53af8191_202772.jpg",
+            quantity: 1,
+            publisher: "অদম্য প্রকাশ",
+            edition: "২০২২"
+        },
+        {
+            id: "15",
+            name: "যন্ত্রকৌশলের যন্ত্রণা",
+            authorName: "এমরান হোসেন",
+            category: "ইঞ্জিনিয়ারিং",
+            prePrice: 467,
+            currPrice: 434,
+            imageURL: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/c54edc325_199974.jpg",
+            quantity: 1,
+            publisher: "রাফিয়া বুক সেন্টার",
+            edition: "২০২০"
         }
     ]
 }
