@@ -8,6 +8,7 @@ import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import Author from './components/Author/Author';
 import Category from './components/Category/Category';
+import Signin from './components/Signin/Signin';
 
 
 export const CartContext = createContext();
@@ -34,6 +35,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/author/:name" element={<Author />} />
         <Route path="/category/:category" element={<Category />} />
+        <Route path="/signIn" element={<Signin />} />
       </Routes>
     </CartContext.Provider>
   );

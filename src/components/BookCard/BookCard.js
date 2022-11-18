@@ -49,7 +49,7 @@ const BookCard = ({ book }) => {
                 <p className='mt-3'><b>{book.name}</b></p>
                 <p>লেখক: <b>{book.authorName}</b></p>
                 <p>মূল্য: <del>{convertedPrice(book.prePrice)}</del> {convertedPrice(book.currPrice)} টাকা</p>
-                <button className="btn btn-dark" onClick={() => handleAddToCart(book)}>Add to cart</button>
+                <button className="btn btn-dark" onClick={() => handleAddToCart(book)}>ব্যাগে নিন</button>
             </div>
         </div>
     )
