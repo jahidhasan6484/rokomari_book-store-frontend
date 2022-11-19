@@ -1,105 +1,76 @@
-import { authentication } from '../../firebase.init';
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { useState } from 'react';
-import { Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { authentication } from "../../firebase.init";
+import { sendSignInLinkToEmail } from "firebase/auth";
+import { useState } from "react";
 
-const Signin = () => {
-    const countryCode = "+880";
+const SignIn = () => {
+    const navigate = useNavigate();
+    const [user] = useAuthState(authentication);
 
-    const [phoneNumber, setPhoneNumber] = useState(countryCode);
-    const [expandForm, setExpandForm] = useState(false);
-    const [OTP, setOTP] = useState('')
+    // for term agree and not agree:
+    const [agree, setAgree] = useState(false);
 
-    const generateRecaptcha = () => {
-        window.recaptchaVerifier = new RecaptchaVerifier('recapta-container', {
-            // 'size': 'invisible',
-            'callback': (response) => {
-                if (response) {
-                    setExpandForm(true);
-                }
-                // reCAPTCHA solved, allow signInWithPhoneNumber.
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState();
+
+    const [
+        signInWithEmailAndPassword,
+        loading, error
+    ] = useSignInWithEmailAndPassword(authentication);
+
+    const handleSignIn = () => {
+        if (user.emailVerified === false) {
+            navigate("/verified");
+        } else {
+            const emaiRegEx = /^\S+@\S+\.\S+$/;
+
+            if (!emaiRegEx.test(email)) {
+                alert("Invalid email pattern")
             }
-        }, authentication);
-    }
 
-    const requestOTP = (e) => {
-        e.preventDefault();
-
-        if (phoneNumber.length == 14) {
-            generateRecaptcha();
-            let appVerifier = window.recaptchaVerifier;
-            signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
-                .then(response => {
-                    window.confirmationResult = response;
-                }).catch((error) => {
-                    console.log(error)
-                })
-        } else {
-            alert("সর্বমোট ১৪ অক্ষরের মোবাইল নম্বর দিন")
+            if (emaiRegEx.test(email) && password) {
+                signInWithEmailAndPassword(email, password);
+            }
         }
     }
 
-
-    const handleConfirmation = () => {
-        if (OTP.length === 6) {
-            let confirmationResult = window.confirmationResult;
-            confirmationResult.confirm(OTP).then((result) => {
-                // User signed in successfully.
-                const user = result.user;
-                if (user.phoneNumber === phoneNumber) {
-                    localStorage.setItem('user', JSON.stringify(user.phoneNumber));
-                    <Navigate to="/" replace={true} />
-                }
-            }).catch((error) => {
-                alert("ভুল ওটিপি দিয়েছেন")
-            });
-        } else {
-            alert("৬ নম্বরের ওটিপি দিন")
-        }
+    if (user) {
+        console.log("User: ", user)
+        console.log("Verification Status: ", user?.emailVerified)
     }
 
+    if (loading) {
+        navigate("/");
+    }
+
+    if (error) {
+        console.log("Error", error)
+    }
 
     return (
         <div className="container section">
-            <h4 className="title">সাইন ইন করুন</h4>
-            <form onSubmit={requestOTP}>
-                <div class="mb-3">
-                    <label htmlFor='mobileNumber' className='form-label'>মোবাইল নম্বর দিন</label>
-                    <input type="tel" class="form-control" id="mobileNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+            <h4 className="title">signIn</h4>
+
+            <div>
+                <div className="mb-3">
+                    <label className="form_label" for="floatingInput">ইমেইল এড্রেস</label>
+                    <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control input_box" id="floatingInput" placeholder="name@example.com" required />
                 </div>
 
-                {
-                    expandForm === true ?
-                        <>
-                            <div className='mb-3'>
-                                <label htmlFor='otpInput' className='form-label'>ওটিপি (OTP) দিন</label>
-                                <input type="number" className="form-control" id="otpInput" placeholder='PLEAE ENTER OTP' value={OTP} onChange={(e) => setOTP(e.target.value)} />
-                            </div>
-                        </>
-                        :
-                        null
-                }
+                <div className="mb-3">
+                    <label className="form_label" for="floatingPassword">পাসওয়ার্ড</label>
+                    <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control input_box" id="floatingPassword" placeholder="Password" required />
+                </div>
 
-                {
-                    expandForm === false ?
-                        <button type='submit' className='btn btn-primary mt-2'>
-                            ওটিপি রিকুয়েস্ট করুন
-                        </button>
-                        : <button onClick={handleConfirmation} className='btn btn-primary mt-2'>
-                            ভেরিফাই করুন
-                        </button>
-                }
+                <button onClick={handleSignIn} className="btn btn-success">Sign In</button>
+            </div>
 
-                {
-                    expandForm === false ?
-                        <div id='recapta-container' className='mt-2'></div>
-                        :
-                        null
-                }
 
-            </form>
+            <Link to="/signUp">Sign Up</Link>
+
         </div>
     )
 }
 
-export default Signin;
+export default SignIn;

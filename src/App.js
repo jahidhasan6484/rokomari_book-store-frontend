@@ -8,7 +8,9 @@ import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import Author from './components/Author/Author';
 import Category from './components/Category/Category';
-import Signin from './components/Signin/Signin';
+import SignUp from './components/SignUp/SignUp';
+import SignIn from './components/SignIn/SignIn';
+import Verified from './components/Verified/Verified';
 
 
 export const CartContext = createContext();
@@ -35,7 +37,9 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/author/:name" element={<Author />} />
         <Route path="/category/:category" element={<Category />} />
-        <Route path="/signIn" element={<Signin />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/verified" element={<Verified />} />
       </Routes>
     </CartContext.Provider>
   );
