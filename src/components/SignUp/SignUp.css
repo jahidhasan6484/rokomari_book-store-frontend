@@ -1,7 +1,13 @@
 .flag {
     width: 30px;
 }
+
 .required {
     color: red;
     font-weight: 600;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
 }

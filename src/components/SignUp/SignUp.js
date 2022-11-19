@@ -1,30 +1,30 @@
 import './SignUp.css';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { authentication } from '../../firebase.init';
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { createUserWithEmailAndPassword, RecaptchaVerifier, sendEmailVerification, sendPasswordResetEmail, signInWithPhoneNumber, updateProfile } from "firebase/auth";
 import { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import bangladeshFlag from '../../images/bangladesh.svg';
+import auth from '../../firebase.init';
 
 const SignUp = () => {
-    const navigate = useNavigate();
     const countryCode = "+880";
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState(null)
+    const [password, setPassword] = useState('')
     const [phoneNumber, setPhoneNumber] = useState(countryCode);
     const [expandForm, setExpandForm] = useState(false);
     const [OTP, setOTP] = useState('');
 
-    const [createUserWithEmailAndPassword, user, loading, error] =
-        useCreateUserWithEmailAndPassword(authentication, { sendEmailVerification: true })
+    const [readyToCreate, setReadyToCreate] = useState(false)
 
     const handleCreateAccount = () => {
-        const emaiRegEx = /^\S+@\S+\.\S+$/;
+        const emailRegEx = /^\S+@\S+\.\S+$/;
         const passwordRegEx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
-        if (!emaiRegEx.test(email)) {
+        console.log(name == '')
+
+        if (!emailRegEx.test(email)) {
             alert("সঠিক ইমেইল এড্রেস দিন")
         }
         if (password.length < 6) {
@@ -33,25 +33,55 @@ const SignUp = () => {
         if (!passwordRegEx.test(password)) {
             alert("অন্তত একটি নাম্বার ও একটি স্পেশাল অক্ষর দিন")
         }
+        if (emailRegEx.test(email) && passwordRegEx.test(password)) {
+            console.log(email, password)
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
 
-        if (name && emaiRegEx.test(email) && passwordRegEx.test(password)) {
-            createUserWithEmailAndPassword(email, password);
-            // toast.success(`${userInfo.email} ইউজার ক্রিয়েটেড সাকসেসফুল্লী।`);
-            // toast.info(`আপনার ${userInfo.email} ইমেইলে একটি ভেরিফিকেশন লিংক পাঠানো হয়েছে।
-            // দয়া করে ভেরিফাই করুন।`);
-            // navigate("/verified");
-            const newUser = {
-                name: name,
-                email : email,
-                phoneNumber: phoneNumber,
-                password: password
-            }
-            console.log(name, email, password, phoneNumber, OTP)
-            alert(`${email} ইমেইলে একটি ভেরিফিকেশন লিংক পাঠানো হয়েছে। দয়া করে ভেরিফাই করুন।`)
-            navigate("/verified");
+                    updateUserProfile();
+
+                    setName('');
+                    setEmail('');
+                    setPassword('');
+                    setPhoneNumber('+880');
+                    setOTP('');
+                    verifyEmail();
+
+                    console.log("USER: ", user)
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage)
+                    // ..
+                });
         }
-        //   event.target.reset();
     }
+
+    const updateUserProfile = () => {
+        updateProfile(auth.currentUser, {
+            displayName: name,
+            phoneNumber: phoneNumber
+        }).then(() => {
+            // Profile updated!
+            // ...
+        }).catch((error) => {
+            // An error occurred
+            // ...
+        });
+    }
+
+    const verifyEmail = () => {
+        sendEmailVerification(auth.currentUser)
+            .then(() => {
+                // Email verification sent!
+                // ...
+                alert("EKTA EMAIL SEND KORECHI")
+            });
+    }
+
+
 
     const generateRecaptcha = () => {
         window.recaptchaVerifier = new RecaptchaVerifier('recapta-container', {
@@ -62,14 +92,14 @@ const SignUp = () => {
                 }
                 // reCAPTCHA solved, allow signInWithPhoneNumber.
             }
-        }, authentication);
+        }, auth);
     }
 
     const requestOTP = () => {
         if (phoneNumber.length === 14) {
             generateRecaptcha();
             let appVerifier = window.recaptchaVerifier;
-            signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
+            signInWithPhoneNumber(auth, phoneNumber, appVerifier)
                 .then(response => {
                     window.confirmationResult = response;
                 }).catch((error) => {
@@ -87,7 +117,7 @@ const SignUp = () => {
                 // User signed in successfully.
                 const user = result.user;
                 if (user.phoneNumber === phoneNumber) {
-                    handleCreateAccount()
+                    setReadyToCreate(true)
                 }
             }).catch((error) => {
                 alert("ভুল ওটিপি দিয়েছেন")
@@ -101,7 +131,7 @@ const SignUp = () => {
         <div className="container section">
             <h4 className="title">একাউন্ট তৈরি করুন</h4>
             <div className='row mt-5'>
-                <div className='col-md-6'>
+                <div className='col-md-6 sign_first'>
                     <p>AAAA</p>
                 </div>
                 <div className='col-md-6 col-12'>
@@ -121,26 +151,21 @@ const SignUp = () => {
                         <input type="password" className="form-control" id="passwordInput" placeholder='অন্তত একটি নাম্বার ও একটি স্পেশাল অক্ষর দিন' value={password} onChange={(e) => setPassword(e.target.value)} required />
                     </div>
 
-                    {/* <button onClick={handleCreateAccount} className='btn btn-primary mb-3'>
-                        একাউন্ট তৈরি করুন
-                    </button> */}
+                    <div className="mb-3">
+                        <label for='mobileNumber' className='form-label'><span className='required'>*</span>মোবাইল নম্বর দিন</label>
+                        <div className="input-group mb-3">
 
-                    <div class="mb-3">
-                        <label htmlFor='mobileNumber' className='form-label'><span className='required'>*</span>মোবাইল নম্বর দিন</label>
-                        <div class="input-group mb-3">
-
-                            <div class="input-group-text" id="basic-addon1">
+                            <div className="input-group-text" id="basic-addon1">
                                 <img className='flag' src={bangladeshFlag} alt="Bangladesh Falg"></img>
                             </div>
-                            <input type="tel" class="form-control" id="mobileNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} aria-label="Username" aria-describedby="basic-addon1" required />
+                            <input type="tel" className="form-control" id="mobileNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} aria-label="Username" aria-describedby="basic-addon1" required />
                         </div>
-
                     </div>
                     {
                         expandForm === true ?
                             <>
                                 <div className='mb-3'>
-                                    <label htmlFor='otpInput' className='form-label'><span className='required'>*</span>ওটিপি (OTP) দিন</label>
+                                    <label for='otpInput' className='form-label'><span className='required'>*</span>ওটিপি (OTP) দিন</label>
                                     <input type="number" className="form-control" id="otpInput" placeholder='৬ নম্বরের ওটিপি দিন' value={OTP} onChange={(e) => setOTP(e.target.value)} required />
                                 </div>
                             </>
@@ -149,13 +174,18 @@ const SignUp = () => {
                     }
 
                     {
-                        expandForm === false ?
-                            <button onClick={requestOTP} type='submit' className='btn btn-primary mt-2'>
-                                ওটিপি রিকুয়েস্ট করুন
-                            </button>
-                            : <button onClick={handleConfirmation} className='btn btn-primary mt-2'>
-                                ভেরিফাই করুন
-                            </button>
+                        readyToCreate === false &&
+                        <>
+                            {
+                                expandForm === false ?
+                                    <button onClick={requestOTP} type='submit' className='btn btn-primary mt-2'>
+                                        ওটিপি রিকুয়েস্ট করুন
+                                    </button>
+                                    : <button onClick={handleConfirmation} className='btn btn-primary mt-2'>
+                                        ভেরিফাই করুন
+                                    </button>
+                            }
+                        </>
                     }
 
                     {
@@ -165,10 +195,13 @@ const SignUp = () => {
                             null
                     }
 
+                    {
+                        readyToCreate && <button onClick={handleCreateAccount} className='btn btn-success mt-2'>Create Account</button>
+                    }
 
                 </div>
 
-                <Link to="/signIn">Sign In</Link>
+                <p className="mt-3">ALready have an account? <Link to="/signIn">Sign In</Link></p>
             </div>
         </div>
     )

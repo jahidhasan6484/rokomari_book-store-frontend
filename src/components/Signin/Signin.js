@@ -1,73 +1,127 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { authentication } from "../../firebase.init";
-import { sendSignInLinkToEmail } from "firebase/auth";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import auth from '../../firebase.init';
+import { signInWithPopup, GoogleAuthProvider, signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";;
 
 const SignIn = () => {
-    const navigate = useNavigate();
-    const [user] = useAuthState(authentication);
 
-    // for term agree and not agree:
-    const [agree, setAgree] = useState(false);
+    const provider = new GoogleAuthProvider();
 
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState('');
 
-    const [
-        signInWithEmailAndPassword,
-        loading, error
-    ] = useSignInWithEmailAndPassword(authentication);
+    const [user, setUser] = useState({})
+
+    const handleGoogleSignIn = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+
+                const newUser = {
+                    name: user.displayName,
+                    email: user.email
+                }
+                setUser(newUser)
+                console.log(user)
+
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+                console.log("Error: ", error)
+            });
+    }
+
+    const handleGoogleSignOut = () => {
+        signOut(auth).then(() => {
+            setUser({})
+        }).catch((error) => {
+            console.log("ERROR", error)
+        });
+    }
 
     const handleSignIn = () => {
-        if (user.emailVerified === false) {
-            navigate("/verified");
-        } else {
-            const emaiRegEx = /^\S+@\S+\.\S+$/;
-
-            if (!emaiRegEx.test(email)) {
-                alert("Invalid email pattern")
-            }
-
-            if (emaiRegEx.test(email) && password) {
-                signInWithEmailAndPassword(email, password);
-            }
-        }
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log("SIGN IN: ", user)
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("SIGN ERROR: ", errorCode)
+            });
     }
 
-    if (user) {
-        console.log("User: ", user)
-        console.log("Verification Status: ", user?.emailVerified)
-    }
-
-    if (loading) {
-        navigate("/");
-    }
-
-    if (error) {
-        console.log("Error", error)
+    const handleForgetPassword = () => {
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                // Password reset email sent!
+                // ..
+                console.log("Password reset email sent!")
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
     }
 
     return (
         <div className="container section">
             <h4 className="title">signIn</h4>
 
-            <div>
-                <div className="mb-3">
-                    <label className="form_label" for="floatingInput">ইমেইল এড্রেস</label>
-                    <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control input_box" id="floatingInput" placeholder="name@example.com" required />
-                </div>
+            <div className="row">
+                <div className="col-md-6 sign_first"></div>
+                <div className="col-md-6 col-12">
+                    {
+                        user.email ?
+                            <button onClick={handleGoogleSignOut} className="btn btn-primary">Google Sign Out</button>
+                            :
+                            <button onClick={handleGoogleSignIn} className="btn btn-primary">Google Sign In</button>
+                    }
 
-                <div className="mb-3">
-                    <label className="form_label" for="floatingPassword">পাসওয়ার্ড</label>
-                    <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control input_box" id="floatingPassword" placeholder="Password" required />
-                </div>
+                    <p>Name: {user.name}</p>
+                    <p>Email: {user.email}</p>
 
-                <button onClick={handleSignIn} className="btn btn-success">Sign In</button>
+                    <div className="mb-3">
+                        <div className="mb-3">
+                            <label className="form_label" or="floatingInput">ইমেইল এড্রেস</label>
+                            <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control input_box" id="floatingInput" placeholder="name@example.com" required />
+                        </div>
+
+                        <div className="mb-3">
+                            <label className="form_label" htmlFor="floatingPassword">পাসওয়ার্ড</label>
+                            <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control input_box" id="floatingPassword" placeholder="Password" required />
+                        </div>
+
+                        <div className="buttons mb-3">
+                            <button onClick={handleSignIn} className="btn btn-success">Sign In</button>
+                            <button onClick={handleForgetPassword} className='btn btn-warning'>Forget Password ?</button>
+                        </div>
+
+                    </div>
+
+                    <p className="mt-3">ALready have an account? <Link to="/signUp">Sign Up</Link></p>
+
+
+
+                </div>
             </div>
 
 
-            <Link to="/signUp">Sign Up</Link>
 
         </div>
     )

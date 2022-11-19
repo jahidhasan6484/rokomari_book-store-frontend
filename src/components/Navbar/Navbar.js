@@ -126,101 +126,101 @@ const Navbar = () => {
   }
 
   return (
-    <div class="fixed-top bg-light border-bottom">
-      <header class="container blog-header lh-1 py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-md-4 pt-5 localTime">
-            <p class="link-secondary">{localTime}</p>
+    <div className="fixed-top bg-light border-bottom">
+      <header className="container blog-header lh-1 py-3">
+        <div className="row flex-nowrap justify-content-between align-items-center">
+          <div className="col-md-4 pt-5 localTime">
+            <p className="link-secondary">{localTime}</p>
           </div>
-          <div class="col-md-4 col-6 text-center">
+          <div className="col-md-4 col-6 text-center">
             <Link to="/">
               <img src={logo} className="logo" alt='Rokomai Logo' />
             </Link>
           </div>
-          <div class="col-md-4 col-6 d-flex justify-content-end align-items-center gap-3">
+          <div className="col-md-4 col-6 d-flex justify-content-end align-items-center gap-3">
             <div className='cart'>
               <Link to="/cart">
                 <p className='cartItemCount'>{convertedCartItem(cart.length)}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bag" viewBox="0 0 16 16">
                   <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
                 </svg>
 
               </Link>
             </div>
             <Link to="/signIn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-gear " viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-person-gear " viewBox="0 0 16 16">
               <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
             </svg>
             </Link>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
+                <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
               </svg>
             </button>
           </div>
         </div>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
+        <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div className="offcanvas-header">
             <Link to="/">
               <img src={logo} className="logo" alt='Rokomai Logo' />
             </Link>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div className="offcanvas-body">
+            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   লেখক
                 </a>
-                <ul class="dropdown-menu">
+                <ul className="dropdown-menu">
                   <li>
-                    <Link to={`/author/${"হুমায়ূন আহমেদ"}`} class="nav-link">হুমায়ূন আহমেদ</Link>
+                    <Link to={`/author/${"হুমায়ূন আহমেদ"}`} className="nav-link">হুমায়ূন আহমেদ</Link>
                   </li>
                   <li>
-                    <Link to={`/author/${"মুহম্মদ জাফর ইকবাল"}`} class="nav-link">মুহম্মদ জাফর ইকবাল</Link>
+                    <Link to={`/author/${"মুহম্মদ জাফর ইকবাল"}`} className="nav-link">মুহম্মদ জাফর ইকবাল</Link>
                   </li>
                   <li>
-                    <Link to={`/author/${"তামিম শাহরিয়ার সুবিন"}`} class="nav-link">তামিম শাহরিয়ার সুবিন</Link>
+                    <Link to={`/author/${"তামিম শাহরিয়ার সুবিন"}`} className="nav-link">তামিম শাহরিয়ার সুবিন</Link>
                   </li>
                   <li>
-                    <Link to={`/author/${"শরৎচন্দ্র চট্টোপাধ্যায়"}`} class="nav-link">শরৎচন্দ্র চট্টোপাধ্যায়</Link>
+                    <Link to={`/author/${"শরৎচন্দ্র চট্টোপাধ্যায়"}`} className="nav-link">শরৎচন্দ্র চট্টোপাধ্যায়</Link>
                   </li>
                   <li>
-                    <Link to={`/author/${"ঝংকার মাহবুব"}`} class="nav-link">ঝংকার মাহবুব</Link>
+                    <Link to={`/author/${"ঝংকার মাহবুব"}`} className="nav-link">ঝংকার মাহবুব</Link>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   বিষয়
                 </a>
-                <ul class="dropdown-menu">
+                <ul className="dropdown-menu">
                   <li>
-                    <Link to={`/category/${"উপন্যাস"}`} class="nav-link">উপন্যাস</Link>
+                    <Link to={`/category/${"উপন্যাস"}`} className="nav-link">উপন্যাস</Link>
                   </li>
                   <li>
-                    <Link to={`/category/${"শিশু-কিশোর বই"}`} class="nav-link">শিশু-কিশোর বই</Link>
+                    <Link to={`/category/${"শিশু-কিশোর বই"}`} className="nav-link">শিশু-কিশোর বই</Link>
                   </li>
                   <li>
-                    <Link to={`/category/${"সায়েন্স ফিকশন"}`} class="nav-link">সায়েন্স ফিকশন</Link>
+                    <Link to={`/category/${"সায়েন্স ফিকশন"}`} className="nav-link">সায়েন্স ফিকশন</Link>
                   </li>
-                  <li class="nav-item">
-                    <Link to={`/category/${"ইসলামি বই"}`} class="nav-link">ইসলামি বই</Link>
-                  </li>
-                  <li>
-                    <Link to={`/category/${"ইঞ্জিনিয়ারিং"}`} class="nav-link">ইঞ্জিনিয়ারিং</Link>
+                  <li className="nav-item">
+                    <Link to={`/category/${"ইসলামি বই"}`} className="nav-link">ইসলামি বই</Link>
                   </li>
                   <li>
-                    <Link to={`/category/${"মেডিকেল"}`} class="nav-link">মেডিকেল</Link>
+                    <Link to={`/category/${"ইঞ্জিনিয়ারিং"}`} className="nav-link">ইঞ্জিনিয়ারিং</Link>
                   </li>
                   <li>
-                    <Link to={`/category/${"রাজনীতি"}`} class="nav-link">রাজনীতি</Link>
+                    <Link to={`/category/${"মেডিকেল"}`} className="nav-link">মেডিকেল</Link>
+                  </li>
+                  <li>
+                    <Link to={`/category/${"রাজনীতি"}`} className="nav-link">রাজনীতি</Link>
                   </li>
                 </ul>
               </li>
               <li>
-                <Link to={`/category/${"কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং"}`} class="nav-link">কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং</Link>
+                <Link to={`/category/${"কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং"}`} className="nav-link">কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং</Link>
               </li>
             </ul>
           </div>
