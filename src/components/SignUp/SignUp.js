@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import bangladeshFlag from '../../images/bangladesh.svg';
 import auth from '../../firebase.init';
+import bangladeshMap from '../../images/map.svg';
 
 const SignUp = () => {
     const countryCode = "+880";
@@ -132,7 +133,9 @@ const SignUp = () => {
             <h4 className="title">একাউন্ট তৈরি করুন</h4>
             <div className='row mt-5'>
                 <div className='col-md-6 sign_first'>
-                    <p>AAAA</p>
+                    <img src={bangladeshMap} className="bangladeshMap" alt='Bangladesh Map' />
+                    <p>আপনার পছন্দের বই খুব সহজেই পৌঁছে যাবে আপনার ঠিকানায়।</p>
+                    <p>রকমারি তে অর্ডার দিন।</p>
                 </div>
                 <div className='col-md-6 col-12'>
 
@@ -178,10 +181,10 @@ const SignUp = () => {
                         <>
                             {
                                 expandForm === false ?
-                                    <button onClick={requestOTP} type='submit' className='btn btn-primary mt-2'>
+                                    <button onClick={requestOTP} type='submit' className='btn btn-info mt-2'>
                                         ওটিপি রিকুয়েস্ট করুন
                                     </button>
-                                    : <button onClick={handleConfirmation} className='btn btn-primary mt-2'>
+                                    : <button onClick={handleConfirmation} className='btn btn-info mt-2'>
                                         ভেরিফাই করুন
                                     </button>
                             }
@@ -199,9 +202,11 @@ const SignUp = () => {
                         readyToCreate && <button onClick={handleCreateAccount} className='btn btn-success mt-2'>Create Account</button>
                     }
 
+                    <p className="mt-3">একাউন্ট আছে? <Link to="/signIn">সাইন ইন করুন</Link></p>
+
                 </div>
 
-                <p className="mt-3">ALready have an account? <Link to="/signIn">Sign In</Link></p>
+
             </div>
         </div>
     )

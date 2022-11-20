@@ -11,3 +11,26 @@
     display: flex;
     justify-content: space-between;
 }
+
+.social_signIn{
+    text-align: center;
+}
+
+.bangladeshMap{
+    width: 50%;
+}
+
+.sign_first {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    opacity: 0.7;
+    color: orangered;
+    font-weight: 600;
+}
+
+.cod {
+    width: 100%;
+}
