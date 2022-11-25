@@ -11,6 +11,7 @@ import Category from './components/Category/Category';
 import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
 import Verified from './components/Verified/Verified';
+import ForgetPassword from './components/ForgetPassword/ForgetPassword';
 
 
 export const CartContext = createContext();
@@ -40,6 +41,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/verified" element={<Verified />} />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
       </Routes>
     </CartContext.Provider>
   );

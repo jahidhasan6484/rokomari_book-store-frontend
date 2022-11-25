@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import cod from '../../images/cod.png';
 import { useState } from "react";
 import auth from '../../firebase.init';
-import { signInWithPopup, GoogleAuthProvider, signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";;
+import { signInWithPopup, GoogleAuthProvider, signOut, signInWithEmailAndPassword, sendPasswordResetEmail, FacebookAuthProvider } from "firebase/auth";;
 
 
 const SignIn = () => {
 
-    const provider = new GoogleAuthProvider();
+    const googleProvider = new GoogleAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +16,7 @@ const SignIn = () => {
     const [user, setUser] = useState({})
 
     const handleGoogleSignIn = () => {
-        signInWithPopup(auth, provider)
+        signInWithPopup(auth, googleProvider)
             .then((result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -42,6 +43,33 @@ const SignIn = () => {
                 // ...
                 console.log("Error: ", error)
             });
+    }
+
+    const handleFacebookSignIn = () => {
+        signInWithPopup(auth, facebookProvider)
+        .then((result) => {
+          // The signed-in user info.
+          const user = result.user;
+      
+          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+          const credential = FacebookAuthProvider.credentialFromResult(result);
+          const accessToken = credential.accessToken;
+
+          console.log("FACEBOOK: ", user)
+      
+          // ...
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = FacebookAuthProvider.credentialFromError(error);
+      
+          // ...
+        });
     }
 
     const handleGoogleSignOut = () => {
@@ -93,18 +121,12 @@ const SignIn = () => {
                 </div>
                 </div>
                 <div className="col-md-6 col-12">
-                    {/* {
-                        user.email ?
-                            <button onClick={handleGoogleSignOut} className="btn btn-primary">Google Sign Out</button>
-                            :
-                            <button onClick={handleGoogleSignIn} className="btn btn-primary">Google Sign In</button>
-                    } */}
 
                     <div className="my-5">
                         <p className="social_signIn mb-5">খুব সহজেই লগ ইন করুন</p>
                         <div className="buttons">
                             <button onClick={handleGoogleSignIn} className="btn btn-outline-primary">গুগল দিয়ে</button>
-                            <button className="btn btn-secondary">মোবাইল নাম্বার দিয়ে</button>
+                            <button onClick={handleFacebookSignIn} className="btn btn-primary">ফেসবুক দিয়ে</button>
                         </div>
                         <p className="social_signIn">অথবা</p>
                     </div>
@@ -122,9 +144,10 @@ const SignIn = () => {
 
                         <div className="buttons mb-3">
                             <button onClick={handleSignIn} className="btn btn-primary">সাইন ইন</button>
-                            <button onClick={handleForgetPassword} className='btn btn-light'>পাসওয়ার্ড ভুলে গেছেন?</button>
+                            <Link to="/forgetPassword">
+                            <button className='btn btn-light'>পাসওয়ার্ড ভুলে গেছেন?</button>
+                            </Link>
                         </div>
-
                     </div>
 
                     <p className="mt-3">রকমারিতে নতুন? <Link to="/signUp">সাইন আপ করুন</Link></p>
