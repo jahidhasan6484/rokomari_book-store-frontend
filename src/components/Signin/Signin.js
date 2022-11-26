@@ -1,56 +1,47 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import cod from '../../images/cod.png';
 import { useState } from "react";
 import auth from '../../firebase.init';
-import { signInWithPopup, GoogleAuthProvider, signOut, signInWithEmailAndPassword, sendPasswordResetEmail, FacebookAuthProvider } from "firebase/auth"; import useFirebase from "../../hooks/useFirebase";
-;
+import { signInWithPopup, GoogleAuthProvider, signOut, signInWithEmailAndPassword, sendPasswordResetEmail, FacebookAuthProvider } from "firebase/auth";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 
 const SignIn = () => {
-
-    const { user, handleSignInWIthGoogle, handleSignOut, handleFacebookSignIn } = useFirebase();
-
-    const googleProvider = new GoogleAuthProvider();
-    const facebookProvider = new FacebookAuthProvider();
-
+    const navigate = useNavigate()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
 
-    const handleSignIn = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log("SIGN IN: ", user)
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("SIGN ERROR: ", errorCode)
-            });
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    if (user) {
+        navigate(from, { replace: true })
     }
 
-    const handleForgetPassword = () => {
-        sendPasswordResetEmail(auth, email)
-            .then(() => {
-                // Password reset email sent!
-                // ..
-                console.log("Password reset email sent!")
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-            });
+    const handleEmailAndPasswordSignIn = (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(email, password)
+    }
+
+
+    const handleSignInWIthGoogle = () => {
+    }
+
+    const handleSignInWithFacebook = () => {
     }
 
     return (
         <div className="container section">
             <h4 className="title">লগ ইন করুন</h4>
 
-            <div className="row">
+            <div className="row mt-5">
                 <div className="col-md-6 sign_first">
                     <div className='col-md-6 sign_first'>
                         <img src={cod} className="cod" alt='Cash On Delivery' />
@@ -59,29 +50,7 @@ const SignIn = () => {
                 </div>
                 <div className="col-md-6 col-12">
 
-                    <div className="my-5">
-                        <p className="social_signIn mb-5">খুব সহজেই লগ ইন করুন</p>
-                        {
-                            <p>User: {user.displayName}</p>
-                        }
-                        <div className="buttons">
-                            {
-                                user.uid ?
-                                    <button onClick={handleSignOut} className="btn btndark">Sign Out</button>
-                                    :
-                                    <>
-                                        <button onClick={handleSignInWIthGoogle} className="btn btn-outline-primary">গুগল দিয়ে</button>
-                                        <button onClick={handleFacebookSignIn} className="btn btn-primary">ফেসবুক দিয়ে</button>
-                                    </>
-
-                            }
-
-
-                        </div>
-                        {/* <p className="social_signIn">অথবা</p> */}
-                    </div>
-
-                    {/* <div className="mb-3">
+                    <form className="mb-3" onSubmit={handleEmailAndPasswordSignIn}>
                         <div className="mb-3">
                             <label className="form_label" or="floatingInput">ইমেইল এড্রেস</label>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control input_box" id="floatingInput" placeholder="সঠিক ইমেইল এড্রেস দিন" required />
@@ -92,23 +61,25 @@ const SignIn = () => {
                             <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control input_box" id="floatingPassword" placeholder="আপনার পাসওয়ার্ড দিন" required />
                         </div>
 
+                        <p className="error">{error?.message}</p>
+
                         <div className="buttons mb-3">
-                            <button onClick={handleSignIn} className="btn btn-primary">সাইন ইন</button>
+                            <input type="submit" className="btn btn-primary" value="সাইন ইন"></input>
+
                             <Link to="/forgetPassword">
                                 <button className='btn btn-light'>পাসওয়ার্ড ভুলে গেছেন?</button>
                             </Link>
                         </div>
-                    </div> */}
+                    </form>
 
                     <p className="mt-3">রকমারিতে নতুন? <Link to="/signUp">সাইন আপ করুন</Link></p>
 
-
-
+                    <div className="social_buttons">
+                        <button onClick={handleSignInWIthGoogle} className="btn btn-outline-primary">গুগল দিয়ে লগ ইন করুন</button>
+                        <button onClick={handleSignInWithFacebook} className="btn btn-primary">ফেসবুক দিয়ে লগ ইন করুন</button>
+                    </div>
                 </div>
             </div>
-
-
-
         </div>
     )
 }

@@ -12,6 +12,13 @@
     justify-content: space-between;
 }
 
+.social_buttons {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .social_signIn{
     text-align: center;
 }
@@ -33,4 +40,11 @@
 
 .cod {
     width: 100%;
+}
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-weight: 600;
 }

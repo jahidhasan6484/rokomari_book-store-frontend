@@ -118,6 +118,10 @@ const Cart = () => {
         setCourierCharge(numberMap[e.target.value])
     }
 
+    const handleConfirmOrder = () => {
+        alert("Your order is confirm")
+    }
+
     return (
         <div className="container section">
             <h4 className="title">কেনাকাটার ব্যাগ</h4>
@@ -187,7 +191,7 @@ const Cart = () => {
                                     <p>৳ {convertedPrice(cartTotal() + courierCharge)}</p>
                                 </div>
 
-                                <button className={courierCharge > 0 ? "btn btn-primary" : "btn btn-primary disabled"}>পে করুন</button>
+                                <button onClick={handleConfirmOrder} className={courierCharge > 0 ? "btn btn-primary" : "btn btn-primary disabled"}>অর্ডার কনফার্ম করুন</button>
                             </div>
                         </div>
                     </> : <p className="empty_cart">আপনার কেনাকাটার ব্যাগ খালি!</p>

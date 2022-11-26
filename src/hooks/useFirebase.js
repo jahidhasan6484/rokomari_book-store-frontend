@@ -8,13 +8,20 @@ const facebookProvider = new FacebookAuthProvider();
 
 const useFirebase = () => {
 
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+    });
 
     const handleSignInWIthGoogle = () => {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
                 const user = result.user;
-                setUser(user)
+                const newUser = {
+                    name: user.displayName,
+                    email: user.email
+                }
+                setUser(newUser)
                 console.log("User: ", user)
             }).catch((error) => {
                 console.log("Error: ", error)
@@ -25,8 +32,12 @@ const useFirebase = () => {
         signInWithPopup(auth, facebookProvider)
             .then((result) => {
                 const user = result.user;
-                setUser(user)
-                console.log("User: ", user)
+                const newUser = {
+                    name: user.displayName,
+                    email: user.email
+                }
+                setUser(newUser)
+                console.log("Facebook User: ", user)
             })
             .catch((error) => {
                 console.log("Error: ", error)
@@ -35,14 +46,28 @@ const useFirebase = () => {
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
-            setUser({})
+            const newUser = {
+                name: "",
+                email: ""
+            }
+            setUser(newUser)
         })
     }
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setUser(user)
+                const newUser = {
+                    name: user.displayName,
+                    email: user.email
+                }
+                setUser(newUser)
+            } else {
+                const newUser = {
+                    name: "",
+                    email: ""
+                }
+                setUser(newUser)
             }
         });
     }, [])
