@@ -4,10 +4,11 @@ import { useState } from "react";
 import auth from '../../firebase.init';
 import { signInWithPopup, GoogleAuthProvider, signOut, signInWithEmailAndPassword, sendPasswordResetEmail, FacebookAuthProvider } from "firebase/auth";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import SocialSignIn from "../SocialSignIn/SocialSignIn";
 
 
 const SignIn = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -22,7 +23,7 @@ const SignIn = () => {
     const from = location.state?.from?.pathname || "/";
 
     if (user) {
-        navigate(from, { replace: true })
+        navigate(from, { replace: true });
     }
 
     const handleEmailAndPasswordSignIn = (e) => {
@@ -31,11 +32,6 @@ const SignIn = () => {
     }
 
 
-    const handleSignInWIthGoogle = () => {
-    }
-
-    const handleSignInWithFacebook = () => {
-    }
 
     return (
         <div className="container section">
@@ -74,10 +70,7 @@ const SignIn = () => {
 
                     <p className="mt-3">রকমারিতে নতুন? <Link to="/signUp">সাইন আপ করুন</Link></p>
 
-                    <div className="social_buttons">
-                        <button onClick={handleSignInWIthGoogle} className="btn btn-outline-primary">গুগল দিয়ে লগ ইন করুন</button>
-                        <button onClick={handleSignInWithFacebook} className="btn btn-primary">ফেসবুক দিয়ে লগ ইন করুন</button>
-                    </div>
+                    <SocialSignIn />
                 </div>
             </div>
         </div>

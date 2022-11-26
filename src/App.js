@@ -14,6 +14,7 @@ import Verified from './components/Verified/Verified';
 import ForgetPassword from './components/ForgetPassword/ForgetPassword';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import Orders from './components/Orders/Orders';
+import Profile from './components/Profile/Profile';
 
 
 export const CartContext = createContext();
@@ -44,10 +45,15 @@ function App() {
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/verified" element={<Verified />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/profile" element={
+          <RequireAuth>
+            <Profile />
+          </RequireAuth>
+        } />
         <Route path="/orders" element={
-           <RequireAuth>
-          <Orders />
-         </RequireAuth>
+          <RequireAuth>
+            <Orders />
+          </RequireAuth>
         } />
       </Routes>
     </CartContext.Provider>

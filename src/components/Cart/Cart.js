@@ -1,8 +1,14 @@
 import { useContext, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../App";
+import auth from "../../firebase.init";
 import './Cart.css';
 
 const Cart = () => {
+    const navigate = useNavigate();
+
+    const [user] = useAuthState(auth);
     const [cart, setCart, booksList] = useContext(CartContext);
 
     const convertedPrice = (_price) => {
@@ -119,7 +125,11 @@ const Cart = () => {
     }
 
     const handleConfirmOrder = () => {
-        alert("Your order is confirm")
+        if (!user) {
+            navigate('/signIn')
+        } else {
+            alert("ORDER CONFIRM")
+        }
     }
 
     return (
@@ -153,7 +163,7 @@ const Cart = () => {
                                                 </div>
                                                 <div className="col-md-2 col-2">
                                                     <div className="col-md-8 col-8">
-                                                    ৳ {convertedPrice(item.currPrice * item.quantity)}
+                                                        ৳ {convertedPrice(item.currPrice * item.quantity)}
                                                     </div>
                                                 </div>
                                                 <div className="col-md-2 col-2">

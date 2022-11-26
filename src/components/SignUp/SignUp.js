@@ -6,6 +6,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import bangladeshFlag from '../../images/bangladesh.svg';
 import auth from '../../firebase.init';
 import bangladeshMap from '../../images/map.svg';
+import SocialSignIn from '../SocialSignIn/SocialSignIn';
 
 const SignUp = () => {
     const countryCode = "+880";
@@ -234,15 +235,9 @@ const SignUp = () => {
 
                        
                         <input type="submit" className="btn btn-success mt-2" value="Create Account" />
-                        
                     </form>
-
                     <p className="mt-3">একাউন্ট আছে? <Link to="/signIn">সাইন ইন করুন</Link></p>
-
-                    <div className="social_buttons">
-                        <button onClick={handleSignInWIthGoogle} className="btn btn-outline-primary">গুগল দিয়ে লগ ইন করুন</button>
-                        <button onClick={handleSignInWithFacebook} className="btn btn-primary">ফেসবুক দিয়ে লগ ইন করুন</button>
-                    </div>
+                    <SocialSignIn />
                 </div>
             </div>
         </div>
