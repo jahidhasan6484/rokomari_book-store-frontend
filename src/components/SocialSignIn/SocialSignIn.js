@@ -5,8 +5,8 @@ import auth from '../../firebase.init';
 const SocialSignIn = () => {
     const navigate = useNavigate();
     
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-    const [signInWithFacebook, facebokUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
+    const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
+    const [signInWithFacebook, facebokUser] = useSignInWithFacebook(auth);
 
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";

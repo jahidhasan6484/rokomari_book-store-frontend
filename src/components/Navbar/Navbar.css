@@ -7,6 +7,10 @@
     .localTime {
         display: none;
     }
+
+    .offcanvas {
+        width: 70% !important;
+    }
 }
 
 .cart a{
@@ -38,7 +42,6 @@
 
 nav {
     overflow-x: scroll;
-
 }
 
 .nav::-webkit-scrollbar {
@@ -48,3 +51,4 @@ nav {
 .dropdown-menu{
     padding-left: 20px;
 }
+

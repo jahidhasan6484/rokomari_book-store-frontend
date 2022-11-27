@@ -4,6 +4,7 @@ import { useState } from "react";
 import auth from '../../firebase.init';
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import SocialSignIn from "../SocialSignIn/SocialSignIn";
+import PageTitle from "../PageTitle/PageTitle";
 
 
 const SignIn = () => {
@@ -26,8 +27,10 @@ const SignIn = () => {
     }
 
     return (
+
         <div className="container section">
-            <h4 className="title">লগ ইন করুন</h4>
+            <PageTitle title="সাইন ইন"/>
+            <h4 className="title">সাইন ইন করুন</h4>
 
             <div className="row info">
                 <div className="col-md-6 col-12">

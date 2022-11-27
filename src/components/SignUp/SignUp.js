@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import auth from '../../firebase.init';
 import SocialSignIn from '../SocialSignIn/SocialSignIn';
+import { Helmet } from 'react-helmet-async';
+import PageTitle from '../PageTitle/PageTitle';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -49,6 +51,7 @@ const SignUp = () => {
 
     return (
         <div className="container section">
+            <PageTitle title="সাইন আপ" />
             <h4 className="title">একাউন্ট তৈরি করুন</h4>
             <div className='row info'>
                 <div className='col-md-6 col-12'>

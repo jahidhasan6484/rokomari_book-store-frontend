@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../App";
 import auth from "../../firebase.init";
+import PageTitle from "../PageTitle/PageTitle";
 import './Cart.css';
 
 const Cart = () => {
@@ -125,15 +126,13 @@ const Cart = () => {
     }
 
     const handleConfirmOrder = () => {
-        if (!user) {
-            navigate('/signIn')
-        } else {
-            alert("ORDER CONFIRM")
-        }
+        navigate('/shipping')
     }
 
     return (
         <div className="container section">
+            <PageTitle title="কেনাকাটার ব্যাগ"/>
+
             <h4 className="title">কেনাকাটার ব্যাগ</h4>
 
             {
@@ -204,7 +203,9 @@ const Cart = () => {
                                 <button onClick={handleConfirmOrder} className={courierCharge > 0 ? "btn btn-primary" : "btn btn-primary disabled"}>অর্ডার কনফার্ম করুন</button>
                             </div>
                         </div>
-                    </> : <p className="empty_cart">আপনার কেনাকাটার ব্যাগ খালি!</p>
+                    </>
+                    :
+                    <p className="empty_cart">আপনার কেনাকাটার ব্যাগ খালি!</p>
             }
 
         </div>

@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../App";
 import BookCard from "../BookCard/BookCard";
@@ -6,10 +7,12 @@ import BookCard from "../BookCard/BookCard";
 const Category = () => {
     const [cart, setCart, booksList] = useContext(CartContext);
     const { category } = useParams();
-    console.log(category)
 
     return (
         <div className="container section">
+            <Helmet>
+                <title>{category} | রকমারি.কম</title>
+            </Helmet>
             <h4 className="title">{category}</h4>
             <div className="row">
                 {

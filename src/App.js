@@ -15,6 +15,7 @@ import ForgetPassword from './components/ForgetPassword/ForgetPassword';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import Orders from './components/Orders/Orders';
 import Profile from './components/Profile/Profile';
+import Shipping from './components/Shipping/Shipping';
 
 
 export const CartContext = createContext();
@@ -53,6 +54,11 @@ function App() {
         <Route path="/orders" element={
           <RequireAuth>
             <Orders />
+          </RequireAuth>
+        } />
+        <Route path="/shipping" element={
+          <RequireAuth>
+            <Shipping />
           </RequireAuth>
         } />
       </Routes>
