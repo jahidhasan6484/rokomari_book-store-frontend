@@ -1,8 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import cod from '../../images/cod.png';
+import signIn from '../../images/svg/signIn.svg';
 import { useState } from "react";
 import auth from '../../firebase.init';
-import { signInWithPopup, GoogleAuthProvider, signOut, signInWithEmailAndPassword, sendPasswordResetEmail, FacebookAuthProvider } from "firebase/auth";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import SocialSignIn from "../SocialSignIn/SocialSignIn";
 
@@ -12,12 +11,7 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [
-        signInWithEmailAndPassword,
-        user,
-        loading,
-        error,
-    ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
 
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -31,36 +25,31 @@ const SignIn = () => {
         signInWithEmailAndPassword(email, password)
     }
 
-
-
     return (
         <div className="container section">
             <h4 className="title">লগ ইন করুন</h4>
 
-            <div className="row mt-5">
-                <div className="col-md-6 sign_first">
-                    <div className='col-md-6 sign_first'>
-                        <img src={cod} className="cod" alt='Cash On Delivery' />
-                        <p>বই হাতে পেয়ে টাকা পরিশোধ করুন।</p>
-                    </div>
+            <div className="row info">
+                <div className="col-md-6 col-12">
+                    <img src={signIn} className="" alt='Sign In' />
                 </div>
                 <div className="col-md-6 col-12">
 
                     <form className="mb-3" onSubmit={handleEmailAndPasswordSignIn}>
                         <div className="mb-3">
-                            <label className="form_label" or="floatingInput">ইমেইল এড্রেস</label>
+                            <label className="form_label" or="floatingInput"><span className='required'>*</span>ইমেইল এড্রেস</label>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control input_box" id="floatingInput" placeholder="সঠিক ইমেইল এড্রেস দিন" required />
                         </div>
 
                         <div className="mb-3">
-                            <label className="form_label" htmlFor="floatingPassword">পাসওয়ার্ড</label>
+                            <label className="form_label" htmlFor="floatingPassword"><span className='required'>*</span>পাসওয়ার্ড</label>
                             <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control input_box" id="floatingPassword" placeholder="আপনার পাসওয়ার্ড দিন" required />
                         </div>
 
                         <p className="error">{error?.message}</p>
 
                         <div className="buttons mb-3">
-                            <input type="submit" className="btn btn-primary" value="সাইন ইন"></input>
+                            <input type="submit" className="btn btn-success" value="সাইন ইন"></input>
 
                             <Link to="/forgetPassword">
                                 <button className='btn btn-light'>পাসওয়ার্ড ভুলে গেছেন?</button>

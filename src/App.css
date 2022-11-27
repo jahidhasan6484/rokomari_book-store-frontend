@@ -4,7 +4,7 @@
     font-family: 'Mina', sans-serif;
 }
 
-.title{
+.title {
     color: green;
     letter-spacing: 2px;
     font-weight: 600;
@@ -16,17 +16,18 @@
     .localTime {
         display: none;
     }
-    .section{
+
+    .section {
         margin-top: 5rem;
     }
-    
-    .sign_first {
-        display: none;
+
+    .info {
+        margin-top: 0;
     }
 }
 
 @media only screen and (min-width: 768px) {
-    .section{
+    .section {
         margin-top: 8rem;
     }
 
@@ -36,4 +37,37 @@ svg {
     cursor: pointer;
 }
 
+.info {
+    display: flex;
+    align-items: center;
+}
 
+.profile_data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile_data img {
+    width: 100px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+.profile_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.data {
+    background: rgb(228, 228, 228);
+    padding: 5px 30px;
+    border-radius: 4px;
+}
+
+.edit {
+    cursor: pointer;
+}
