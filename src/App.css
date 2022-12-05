@@ -71,3 +71,10 @@ svg {
 .edit {
     cursor: pointer;
 }
+
+.jahid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}

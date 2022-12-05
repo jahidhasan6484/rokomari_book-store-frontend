@@ -16,6 +16,7 @@ import RequireAuth from './components/RequireAuth/RequireAuth';
 import Orders from './components/Orders/Orders';
 import Profile from './components/Profile/Profile';
 import Shipping from './components/Shipping/Shipping';
+import DB from './components/DB/DB';
 
 
 export const CartContext = createContext();
@@ -39,6 +40,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/db" element={<DB />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/author/:name" element={<Author />} />
         <Route path="/category/:category" element={<Category />} />
