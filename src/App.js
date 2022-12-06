@@ -17,15 +17,22 @@ import Orders from './components/Orders/Orders';
 import Profile from './components/Profile/Profile';
 import Shipping from './components/Shipping/Shipping';
 import DB from './components/DB/DB';
+import Update from './components/Update/Update';
 
 
 export const CartContext = createContext();
 
 function App() {
 
-  const { booksList } = data;
+  const [bookDB, setBookDB] = useState([]);
 
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    fetch("https://rokomari-book-store-backend.vercel.app/bookDB")
+        .then((response) => response.json())
+        .then((result) => setBookDB(result))
+}, []);
 
   useEffect(() => {
 
@@ -36,7 +43,7 @@ function App() {
   }, [])
 
   return (
-    <CartContext.Provider value={[cart, setCart, booksList]}>
+    <CartContext.Provider value={[cart, setCart, bookDB]}>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -48,6 +55,7 @@ function App() {
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/verified" element={<Verified />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/update/:id" element={<Update />} />
         <Route path="/profile" element={
           <RequireAuth>
             <Profile />

@@ -3,12 +3,12 @@ import { CartContext } from "../../App";
 import BookCard from "../BookCard/BookCard";
 
 const Books = () => {
-    const [cart, setCart, booksList] = useContext(CartContext);
+    const [cart, setCart, bookDB] = useContext(CartContext);
     return (
         <div className="container mt-5">
             <div className="row">
             {
-                booksList.map((book) => <BookCard key={book.id} book={book} />)
+                bookDB.map((book) => <BookCard key={book._id} book={book} />)
             }
             </div>
             

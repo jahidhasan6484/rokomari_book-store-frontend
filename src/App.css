@@ -19,6 +19,7 @@
 
     .section {
         margin-top: 5rem;
+        margin-bottom: 2rem;
     }
 
     .info {
@@ -29,6 +30,7 @@
 @media only screen and (min-width: 768px) {
     .section {
         margin-top: 8rem;
+        margin-bottom: 5rem;
     }
 
 }
@@ -70,11 +72,4 @@ svg {
 
 .edit {
     cursor: pointer;
-}
-
-.jahid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
 }

@@ -10,7 +10,7 @@ const Cart = () => {
     const navigate = useNavigate();
 
     const [user] = useAuthState(auth);
-    const [cart, setCart, booksList] = useContext(CartContext);
+    const [cart, setCart, bookDB] = useContext(CartContext);
 
     const convertedPrice = (_price) => {
         let tempPrice = String(_price).split("");
@@ -60,9 +60,9 @@ const Cart = () => {
         return result.join("");
     }
 
-    const itemIncrease = (_id) => {
+    const itemIncrease = (i_id) => {
         cart.map((item, index) => {
-            if (item.id == _id) {
+            if (item._id == i_id) {
                 const update = {
                     ...item,
                     quantity: item.quantity + 1
@@ -76,9 +76,9 @@ const Cart = () => {
         })
     }
 
-    const itemDecrease = (_id) => {
+    const itemDecrease = (d_id) => {
         cart.map((item, index) => {
-            if (item.id == _id) {
+            if (item._id == d_id) {
                 const update = {
                     ...item,
                     quantity: item.quantity - 1
@@ -87,7 +87,7 @@ const Cart = () => {
                 tempCart[index] = update;
                 if (tempCart[index].quantity < 1) {
 
-                    const updatedCart = tempCart.filter((item) => item.id !== _id)
+                    const updatedCart = tempCart.filter((item) => item._id !== d_id)
                     localStorage.setItem("cart", JSON.stringify(updatedCart))
                     setCart(updatedCart)
                 } else {
@@ -100,12 +100,12 @@ const Cart = () => {
 
     const cartTotal = () => {
         return cart.reduce(function (acc, obj) {
-            return acc + obj.currPrice * obj.quantity;
+            return acc + obj.price * obj.quantity;
         }, 0);
     }
 
-    const handleRemove = (_id) => {
-        const updatedCart = cart.filter((item) => item.id !== _id)
+    const handleRemove = (r_id) => {
+        const updatedCart = cart.filter((item) => item._id !== r_id)
         localStorage.setItem("cart", JSON.stringify(updatedCart))
         setCart(updatedCart)
     }
@@ -146,27 +146,27 @@ const Cart = () => {
                                         return (
                                             <div className="row mb-5">
                                                 <div className="col-md-2 col-2">
-                                                    <img src={item.imageURL} className="cart_image img-fluid" alt={item.name} />
+                                                    <img src={item.image} className="cart_image img-fluid" alt={item.name} />
                                                 </div>
                                                 <div className="col-md-3 col-3">
                                                     <p>{item.name}</p>
                                                 </div>
                                                 <div className="col-md-3 col-3 item_control">
-                                                    <svg onClick={() => itemDecrease(item.id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-dash-lg" viewBox="0 0 16 16">
+                                                    <svg onClick={() => itemDecrease(item._id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-dash-lg" viewBox="0 0 16 16">
                                                         <path fillRule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
                                                     </svg>
                                                     {convertedQuantity(item.quantity)}
-                                                    <svg onClick={() => itemIncrease(item.id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                    <svg onClick={() => itemIncrease(item._id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
                                                         <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                                                     </svg>
                                                 </div>
                                                 <div className="col-md-2 col-2">
                                                     <div className="col-md-8 col-8">
-                                                        ৳ {convertedPrice(item.currPrice * item.quantity)}
+                                                        ৳ {convertedPrice(item.price * item.quantity)}
                                                     </div>
                                                 </div>
                                                 <div className="col-md-2 col-2">
-                                                    <button onClick={() => handleRemove(item.id)} className="btn btn-danger">X</button>
+                                                    <button onClick={() => handleRemove(item._id)} className="btn btn-danger">X</button>
                                                 </div>
                                             </div>
                                         )
