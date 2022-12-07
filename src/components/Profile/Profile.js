@@ -15,7 +15,7 @@ const Profile = () => {
             <h4 className="title">প্রোফাইল</h4>
             <div className="row info">
                 <div className="col-md-6">
-                    <img src={profile} alt="Profile"></img>
+                    <img src={profile} className="img-fluid" alt="Profile"></img>
                 </div>
                 <div className="col-md-6 profile_data">
                     {

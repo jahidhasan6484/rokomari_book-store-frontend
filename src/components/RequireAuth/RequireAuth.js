@@ -15,17 +15,26 @@ const RequireAuth = ({ children }) => {
     if (!user.emailVerified) {
         return (
             <div className="container section">
-            <h4 className="title">সাইন ইন করুন</h4>
-                <button className="btn btn-dark"
-                    onClick={async () => {
-                        const success = await sendEmailVerification();
-                        if (success) {
-                            alert('Sent email');
-                        }
-                    }}
-                >
-                    Verify email
-                </button>
+                <PageTitle title="ইমেইল ভেরিফাই" />
+
+                <h4 className="title">আপনার ইমেইল ভেরিফাই করুন</h4>
+
+                <div className="text-center mt-5">
+                    <p className="">দয়া করে আপনার ইমেইল চেক করুন। সেখান থেকে ভেরিফিকেশন লিংকের উপরে ক্লিক করে আপনার ইমেইল ভেরিফাই করুন।</p>
+                    <p className="">ইতিমধ্যে আপনার ইমেইল ভেরিফাই করে থাকলে পেজটি রিলোড দিন।</p>
+
+                    <button className="btn btn-dark"
+                        onClick={async () => {
+                            const success = await sendEmailVerification();
+                            if (success) {
+                                alert(`${user.email} ইমেইলে একটি নতুন ভেরিফিকেশন লিংক পাঠানো হয়েছে`);
+                            }
+                        }}
+                    >
+                        আবার ভেরিফিকেশন লিংক পাঠান
+                    </button>
+
+                </div>
             </div>
         )
     }

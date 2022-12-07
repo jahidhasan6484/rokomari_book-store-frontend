@@ -1,14 +1,15 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import api from "../API";
+import PageTitle from "../PageTitle/PageTitle";
+import update from '../../images/svg/update.svg';
 
 const Update = () => {
     const { id } = useParams();
-    const [data, setData] = useState({})
+    const [data, setData] = useState({});
 
     useEffect(() => {
-        fetch(`https://rokomari-book-store-backend.vercel.app/book/${id}`)
+        fetch(`${api}/book/${id}`)
             .then(response => response.json())
             .then(result => setData(result))
     }, [id]);
@@ -16,14 +17,14 @@ const Update = () => {
     const handleUpdateBook = (e) => {
         e.preventDefault();
 
-        const name = e.target.bookName.value;
         const price = e.target.price.value;
 
         const updatedBook = {
-            name, price
+            ...data,
+            price: price
         }
 
-        fetch(`https://rokomari-book-store-backend.vercel.app/update/${id}`, {
+        fetch(`${api}/update/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,29 +33,36 @@ const Update = () => {
         })
             .then((response) => response.json())
             .then((result) => {
-                    alert("UpdatedSuc")
-                    e.target.reset();
+                alert("UpdatedSuc")
+                e.target.reset();
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-
     }
 
     return (
-        <div className="container section">
-            <Helmet>
-                <title>Update | রকমারি.কম</title>
-            </Helmet>
 
-            <form onSubmit={handleUpdateBook} className="py-5">
-                <input type="text" placeholder="Book Name" name="bookName" required />
-                <br></br>
-                <input type="number" placeholder="Price" name="price" required />
-                <br></br>
-                <input type="submit" value="Add" />
-                <br></br>
-            </form>
+        <div className="container section">
+            <PageTitle title="আপডেট" />
+            <h4 className="title">আপডেট ({data.name})</h4>
+
+            <div className="row mt-5 info">
+                <div className="col-md-6 col-12">
+                    <img src={update} className="img-fluid" alt='Update' />
+                </div>
+                <div className="col-md-6 col-12">
+                    <form className="mb-3" onSubmit={handleUpdateBook}>
+                        <div className="mb-3">
+                            <label className="form_label"><span className='required'>*</span>মূল্য</label>
+                            <input type="number" name="price" className="form-control input_box" placeholder="বর্তমান মূল্য দিন" required />
+                        </div>
+                        <div className="buttons mb-3">
+                            <input type="submit" className="btn btn-success" value="মূল্য আপডেট করুন"></input>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }

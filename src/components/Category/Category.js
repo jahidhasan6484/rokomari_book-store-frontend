@@ -5,7 +5,7 @@ import { CartContext } from "../../App";
 import BookCard from "../BookCard/BookCard";
 
 const Category = () => {
-    const [cart, setCart, booksList] = useContext(CartContext);
+    const [cart, setCart, bookDB, setBookDB, admins] = useContext(CartContext);
     const { category } = useParams();
 
     return (
@@ -16,7 +16,7 @@ const Category = () => {
             <h4 className="title">{category}</h4>
             <div className="row">
                 {
-                    booksList.map((book) => {
+                    bookDB.map((book) => {
                         if (book.category === category) {
                             return (
                                 <BookCard key={book.id} book={book} />

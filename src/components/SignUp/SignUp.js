@@ -55,7 +55,7 @@ const SignUp = () => {
             <h4 className="title">একাউন্ট তৈরি করুন</h4>
             <div className='row info'>
                 <div className='col-md-6 col-12'>
-                    <img src={signUp} className="" alt='Sign Up' />
+                    <img src={signUp} className="img-fluid" alt='Sign Up' />
                 </div>
                 <div className='col-md-6 col-12'>
                     <form onSubmit={handleCreateAccount} className="mb-3">

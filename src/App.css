@@ -25,6 +25,10 @@
     .info {
         margin-top: 0;
     }
+
+    .authorName {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -72,4 +76,13 @@ svg {
 
 .edit {
     cursor: pointer;
+}
+
+.book_info {
+    display: flex;
+    align-items: center;
+}
+
+.manage_button {
+   text-align: center;
 }

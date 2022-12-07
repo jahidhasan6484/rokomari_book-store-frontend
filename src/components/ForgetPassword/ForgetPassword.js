@@ -3,8 +3,7 @@ import forgotPassword from '../../images/svg/forgotPassword.svg';
 import { useState } from "react";
 import auth from "../../firebase.init";
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
-import { Helmet } from 'react-helmet-async';
-
+import PageTitle from '../PageTitle/PageTitle';
 
 const ForgetPassword = () => {
     const emailRegEx = /^\S+@\S+\.\S+$/;
@@ -28,9 +27,7 @@ const ForgetPassword = () => {
 
     return (
         <div className="container section">
-            <Helmet>
-                <title>রিসেট পাসওয়ার্ড | রকমারি.কম</title>
-            </Helmet>
+            <PageTitle title="রিসেট পাসওয়ার্ড"/>
 
             <h4 className="title">পাসওয়ার্ড ভুলে গেছেন?</h4>
             <div className="mb-3">

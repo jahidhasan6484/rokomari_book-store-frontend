@@ -10,7 +10,7 @@ const Cart = () => {
     const navigate = useNavigate();
 
     const [user] = useAuthState(auth);
-    const [cart, setCart, bookDB] = useContext(CartContext);
+    const [cart, setCart, bookDB, setBookDB, admins] = useContext(CartContext);
 
     const convertedPrice = (_price) => {
         let tempPrice = String(_price).split("");
@@ -131,7 +131,7 @@ const Cart = () => {
 
     return (
         <div className="container section">
-            <PageTitle title="কেনাকাটার ব্যাগ"/>
+            <PageTitle title="কেনাকাটার ব্যাগ" />
 
             <h4 className="title">কেনাকাটার ব্যাগ</h4>
 
@@ -146,7 +146,7 @@ const Cart = () => {
                                         return (
                                             <div className="row mb-5">
                                                 <div className="col-md-2 col-2">
-                                                    <img src={item.image} className="cart_image img-fluid" alt={item.name} />
+                                                    <img src={item.image} className="img-fluid" alt={item.name} />
                                                 </div>
                                                 <div className="col-md-3 col-3">
                                                     <p>{item.name}</p>

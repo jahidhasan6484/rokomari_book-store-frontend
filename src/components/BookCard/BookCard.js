@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { CartContext } from '../../App';
 import './BookCard.css';
 const BookCard = ({ book }) => {
-    const [cart, setCart, bookDB] = useContext(CartContext);
+    const [cart, setCart, bookDB, setBookDB, admins] = useContext(CartContext);
 
     const convertedPrice = (_price) => {
         let tempPrice = String(_price).split("");
@@ -32,7 +32,7 @@ const BookCard = ({ book }) => {
         const productExist = cart.find((item) => item._id === _book._id);
 
         if (productExist) {
-            alert("Already added to the cart")
+            alert("বইটি কেনাকাটার ব্যাগে যুক্ত আছে")
         } else {
             let tempCart = [...cart]
             tempCart.push(_book)

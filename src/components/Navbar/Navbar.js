@@ -8,7 +8,7 @@ import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
 
 const Navbar = () => {
-  const [cart, setCart, bookDB] = useContext(CartContext);
+  const [cart, setCart, bookDB, setBookDB, admins] = useContext(CartContext);
 
   let time = '';
   const [localTime, setLocalTime] = useState(time)
@@ -88,7 +88,7 @@ const Navbar = () => {
         status = "সকাল"
       }
     } else if (_status == "PM") {
-      if (_hour <= 3) {
+      if (_hour == 12 || _hour <= 3) {
         status = "দুপুর"
       } else if (_hour <= 5) {
         status = "বিকাল"
@@ -166,13 +166,13 @@ const Navbar = () => {
 
                   <ul class="dropdown-menu">
                     <li>
-                      <Link to="/profile" className="dropdown-item">Profile</Link>
+                      <Link to="/profile" className="dropdown-item">প্রোফাইল</Link>
                     </li>
                     <li>
-                      <Link to="/orders" className="dropdown-item">Orders</Link>
+                      <Link to="/orders" className="dropdown-item">আগের কেনাকাটা</Link>
                     </li>
                     <li>
-                      <Link onClick={handleSignOut} className="dropdown-item">Sign Out</Link>
+                      <Link onClick={handleSignOut} className="dropdown-item">সাইন আউট</Link>
                     </li>
                   </ul>
                 </div>
@@ -231,6 +231,9 @@ const Navbar = () => {
                     <Link to={`/category/${"উপন্যাস"}`} className="nav-link">উপন্যাস</Link>
                   </li>
                   <li>
+                    <Link to={`/category/${"কাব্য"}`} className="nav-link">কাব্য</Link>
+                  </li>
+                  <li>
                     <Link to={`/category/${"শিশু-কিশোর বই"}`} className="nav-link">শিশু-কিশোর বই</Link>
                   </li>
                   <li>
@@ -250,9 +253,25 @@ const Navbar = () => {
                   </li>
                 </ul>
               </li>
+
               <li>
                 <Link to={`/category/${"কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং"}`} className="nav-link">কম্পিউটার, ফ্রিল্যান্সিং ও প্রোগ্রামিং</Link>
               </li>
+
+              {
+                admins?.map((admin) => {
+                  if (admin.email === user?.email) {
+                    return (
+                      <div className='mt-5'>
+                       
+                          <Link to="/addBook" className="nav-link">নতুন বই যুক্ত করুন</Link>
+                          <Link to="/manageBook" className="nav-link">ডাটাবেজ পরিচালনা করুন</Link>
+                        
+                      </div>
+                    )
+                  }
+                })
+              }
             </ul>
           </div>
         </div>

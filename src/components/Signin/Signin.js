@@ -27,20 +27,19 @@ const SignIn = () => {
     }
 
     return (
-
         <div className="container section">
             <PageTitle title="সাইন ইন"/>
             <h4 className="title">সাইন ইন করুন</h4>
 
             <div className="row info">
                 <div className="col-md-6 col-12">
-                    <img src={signIn} className="" alt='Sign In' />
+                    <img src={signIn} className="img-fluid" alt='Sign In' />
                 </div>
                 <div className="col-md-6 col-12">
 
                     <form className="mb-3" onSubmit={handleEmailAndPasswordSignIn}>
                         <div className="mb-3">
-                            <label className="form_label" or="floatingInput"><span className='required'>*</span>ইমেইল এড্রেস</label>
+                            <label className="form_label" htmlFor="floatingInput"><span className='required'>*</span>ইমেইল এড্রেস</label>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control input_box" id="floatingInput" placeholder="সঠিক ইমেইল এড্রেস দিন" required />
                         </div>
 
