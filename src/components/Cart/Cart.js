@@ -1,8 +1,10 @@
+import axios from "axios";
 import { useContext, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../App";
 import auth from "../../firebase.init";
+import api from "../API";
 import PageTitle from "../PageTitle/PageTitle";
 import './Cart.css';
 
@@ -112,7 +114,8 @@ const Cart = () => {
 
     let address = ["ঢাকা", "রাজশাহী", "সিলেট", "চট্টগ্রাম"];
 
-    const [courierCharge, setCourierCharge] = useState(0)
+    const [courierCharge, setCourierCharge] = useState(0);
+    const [courierLocation, setCourierLocation] = useState('')
 
     const handleAddress = (e) => {
         const numberMap = {
@@ -121,12 +124,18 @@ const Cart = () => {
             "সিলেট": 100,
             "চট্টগ্রাম": 90
         }
-
+        setCourierLocation(e.target.value)
         setCourierCharge(numberMap[e.target.value])
     }
 
-    const handleConfirmOrder = () => {
-        navigate('/shipping')
+    const handleConfirmOrder = async () => {
+        // localStorage.removeItem(courierLocation);
+        // localStorage.removeItem(courierCharge);
+        // localStorage.setItem('courierLocation', courierLocation);
+        // localStorage.setItem('courierCharge', courierCharge);
+        // navigate('/shipping')
+
+        alert("SSL Commerz payment system comming soon. After implementing payment system you can buy books. Thanks!")
     }
 
     return (
