@@ -5,7 +5,7 @@ const Failed = () => {
         <div className="container section">
             <PageTitle title="কেনাকাটার ব্যাগ" />
 
-            <h4 className="title">Kam akam</h4>
+            <h5 className="failed_message">দুঃখিত, আপনার পেমেন্ট সম্পন্ন হয়নি।</h5>
         </div>
     )
 }

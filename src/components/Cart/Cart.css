@@ -36,7 +36,10 @@
 }
 
 .cart_sidebar {
-    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 750px;
 }
 
 .details {

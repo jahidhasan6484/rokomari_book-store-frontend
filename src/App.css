@@ -84,5 +84,44 @@ svg {
 }
 
 .manage_button {
-   text-align: center;
+    text-align: center;
+}
+
+.success_card {
+    display: flex;
+}
+
+.success_image {
+    object-fit: cover;
+}
+
+.success_product {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.success_message {
+    text-align: center;
+    color: green;
+    font-weight: 600;
+}
+
+.success_product_top,
+.serial {
+    font-weight: 600;
+}
+
+.print{
+    text-align: right;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.failed_message{
+    color: red;
+    font-weight: 600;
+    text-align: center;
 }
