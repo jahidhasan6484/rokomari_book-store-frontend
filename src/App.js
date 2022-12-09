@@ -18,6 +18,8 @@ import AddBook from './components/AddBook/AddBook';
 import Update from './components/Update/Update';
 import api from './components/API';
 import ManageBook from './components/ManageBook/ManageBook';
+import Success from './components/Payment/Success';
+import Failed from './components/Payment/Failed';
 
 
 export const CartContext = createContext();
@@ -54,6 +56,10 @@ function App() {
         <Route path="/manageBook" element={<ManageBook />} />
         <Route path="/update/:id" element={<Update />} />
         <Route path="/cart" element={<Cart />} />
+      
+        <Route path="/payment/success" element={<Success />} />
+        <Route path="/payment/fail" element={<Failed />} />
+
         <Route path="/author/:name" element={<Author />} />
         <Route path="/category/:category" element={<Category />} />
         <Route path="/signUp" element={<SignUp />} />

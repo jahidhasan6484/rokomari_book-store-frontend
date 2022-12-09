@@ -128,14 +128,34 @@ const Cart = () => {
         setCourierCharge(numberMap[e.target.value])
     }
 
-    const handleConfirmOrder = async () => {
-        // localStorage.removeItem(courierLocation);
-        // localStorage.removeItem(courierCharge);
-        // localStorage.setItem('courierLocation', courierLocation);
-        // localStorage.setItem('courierCharge', courierCharge);
-        // navigate('/shipping')
+    const handleConfirmOrder = () => {
+    }
 
-        alert("SSL Commerz payment system comming soon. After implementing payment system you can buy books. Thanks!")
+    const handlePay = (e) => {
+        e.preventDefault();
+
+        const name = e.target.name.value;
+        const price = e.target.price.value;
+        const postalCode = e.target.postalCode.value;
+
+        const paymentInfo = {
+            name: name,
+            price : price,
+            postal_code : postalCode
+        }
+
+        fetch(`${api}/orders`, {
+            method : "POST",
+            headers : {
+                "content-type" : "application/json"
+            },
+            body : JSON.stringify(paymentInfo),           
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            window.location.replace(data.url);
+        })
+        .catch((err) => console.err(err));
     }
 
     return (
@@ -182,7 +202,22 @@ const Cart = () => {
                                     })
                                 }
                             </div>
-                            <div className="col-md-4 col-12 cart_sidebar">
+
+                            <div className="col-md-4 cart_sidear">
+
+                                <form onSubmit={handlePay}>
+                                    <input type="text" name="name" placeholder="Your name" required></input>
+                                    <br></br>
+                                    <input type="number" name="price" placeholder="Price" required></input>
+                                    <br></br>
+                                    <input type="number" name="postalCode" placeholder="Postal Code" required></input>
+                                    <br></br>
+                                    <input type="submit" value="Pay"></input>
+                                </form>
+
+                            </div>
+
+                            {/* <div className="col-md-4 col-12 cart_sidebar">
                                 <select class="form-select" aria-label="Default select example" onChange={(e) => handleAddress(e)}>
                                     <option>ঠিকানা সিলেক্ট করুন</option>
                                     {
@@ -210,7 +245,7 @@ const Cart = () => {
                                 </div>
 
                                 <button onClick={handleConfirmOrder} className={courierCharge > 0 ? "btn btn-primary" : "btn btn-primary disabled"}>অর্ডার কনফার্ম করুন</button>
-                            </div>
+                            </div> */}
                         </div>
                     </>
                     :
