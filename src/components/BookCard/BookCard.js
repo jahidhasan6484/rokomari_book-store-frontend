@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { CartContext } from '../../App';
 import './BookCard.css';
 const BookCard = ({ book }) => {
@@ -43,14 +44,17 @@ const BookCard = ({ book }) => {
     }
 
     return (
+
         <div className="col-md-2 col-6 book_col">
-            <div className='book_card'>
-                <img src={book.image}></img>
-                <p className='mt-3'><b>{book.name}</b></p>
-                <p>লেখক: <b>{book.authorName}</b></p>
-                <p>মূল্য: {convertedPrice(book.price)} টাকা</p>
-                <button className="btn btn-dark" onClick={() => handleAddToCart(book)}>ব্যাগে নিন</button>
-            </div>
+            <Link to={`/book/${book._id}`}>
+                <div className='book_card'>
+                    <img src={book.image}></img>
+                    <p className='mt-3'><b>{book.name}</b></p>
+                    <p>লেখক: <b>{book.authorName}</b></p>
+                    <p>মূল্য: {convertedPrice(book.price)} টাকা</p>
+                    <button className="btn btn-dark" onClick={() => handleAddToCart(book)}>ব্যাগে নিন</button>
+                </div>
+            </Link>
         </div>
     )
 }

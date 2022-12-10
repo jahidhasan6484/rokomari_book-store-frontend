@@ -29,12 +29,36 @@
     .authorName {
         display: none;
     }
+
+}
+@media only screen and (max-width: 1024px) {
+
+    .details_card {
+        background: rgb(245, 245, 245);
+        border: 1px solid rgb(231, 231, 231);
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        gap: 10px;
+    }
 }
 
 @media only screen and (min-width: 768px) {
     .section {
         margin-top: 8rem;
         margin-bottom: 5rem;
+    }
+
+    .details_card {
+        background: rgb(245, 245, 245);
+        border: 1px solid rgb(231, 231, 231);
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px;
     }
 
 }
@@ -125,3 +149,24 @@ svg {
     font-weight: 600;
     text-align: center;
 }
+
+.book_name {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.suggestion_image{
+    width: 100px;
+}
+
+.suggestion_card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.sugg_info{
+    text-decoration: none !important;
+}
+

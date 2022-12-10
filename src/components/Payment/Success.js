@@ -84,20 +84,20 @@ const Success = () => {
 
                     <p className="mt-5"><span className="bold">লেনদেনের আইডি:</span> {newOrder.transaction_id}</p>
 
-                    <div className="row">
-                        <div className="col-md-3 col-12">
+                   
+                        <div>
                             <p><span className="bold">নাম:</span> {newOrder.name}</p>
                         </div>
-                        <div className="col-md-3 col-12">
+                        <div>
                             <p><span className="bold">ইমেইল:</span> {newOrder.email}</p>
                         </div>
-                        <div className="col-md-3 col-12">
+                        <div>
                             <p><span className="bold">কুরিয়ার চার্জ:</span> ৳ {convertedPrice(newOrder.courierCharge)}</p>
                         </div>
-                        <div className="col-md-3 col-12">
+                        <div>
                             <p><span className="bold">সর্বমোট:</span> ৳ {convertedPrice(newOrder.totalCharge)}</p>
                         </div>
-                    </div>
+                 
 
                     <div className="row">
                         <div className="col-md-12">
