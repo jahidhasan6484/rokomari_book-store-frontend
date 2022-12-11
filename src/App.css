@@ -170,3 +170,15 @@ svg {
     text-decoration: none !important;
 }
 
+.spinner{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .spinner img {
+    width: 150px;
+  }
+

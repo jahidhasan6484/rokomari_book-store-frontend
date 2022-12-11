@@ -8,7 +8,7 @@ const Details = () => {
     const [cart, setCart, bookDB, setBookDB, admins] = useContext(CartContext);
     const { id } = useParams();
     const [info, setInfo] = useState({});
-    const [suggestion, setSuggestion] = useState([])
+    const [suggestion, setSuggestion] = useState([]);
 
     useEffect(() => {
         fetch(`${api}/book/${id}`)

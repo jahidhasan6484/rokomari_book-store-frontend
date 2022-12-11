@@ -10,7 +10,7 @@ const Profile = () => {
     return (
         <div className="container section">
             <Helmet>
-                <title>প্রোফাইল - {user.email} | রকমারি.কম</title>
+                <title>প্রোফাইল - {user?.email} | রকমারি.কম</title>
             </Helmet>
             <h4 className="title">প্রোফাইল</h4>
             <div className="row info">
@@ -19,23 +19,22 @@ const Profile = () => {
                 </div>
                 <div className="col-md-6 profile_data">
                     {
-                        user.photoURL && <img src={user.photoURL} />
+                        user &&
+                        <>
+                            <div className='profile_info'>
+                                <p>নাম:</p>
+                                <p className='data'>{user.displayName}</p>
+                            </div>
+                            <div className='profile_info'>
+                                <p>ইমেইল:</p>
+                                <p className='data'>{user.email}</p>
+                            </div>
+                            <div className='profile_info'>
+                                <p>সর্বশেষ সাইন ইন:</p>
+                                <p className='data'>{user.metadata.lastSignInTime}</p>
+                            </div></>
+
                     }
-                    {
-                        !user.photoURL && <img src={defaultProfile} />
-                    }
-                    <div className='profile_info'>
-                        <p>নাম:</p>
-                        <p className='data'>{user.displayName}</p>
-                    </div>
-                    <div className='profile_info'>
-                        <p>ইমেইল:</p>
-                        <p className='data'>{user.email}</p>
-                    </div>
-                    <div className='profile_info'>
-                        <p>সর্বশেষ সাইন ইন:</p>
-                        <p className='data'>{user.metadata.lastSignInTime}</p>
-                    </div>
                 </div>
             </div>
         </div>

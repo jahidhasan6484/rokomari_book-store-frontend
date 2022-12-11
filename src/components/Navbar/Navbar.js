@@ -168,9 +168,9 @@ const Navbar = () => {
                     <li>
                       <Link to="/profile" className="dropdown-item">প্রোফাইল</Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link to="/orders" className="dropdown-item">আগের কেনাকাটা</Link>
-                    </li>
+                    </li> */}
                     <li>
                       <Link onClick={handleSignOut} className="dropdown-item">সাইন আউট</Link>
                     </li>

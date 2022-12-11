@@ -72,11 +72,11 @@ function App() {
             <Profile />
           </RequireAuth>
         } />
-        <Route path="/orders" element={
+        {/* <Route path="/orders" element={
           <RequireAuth>
             <Orders />
           </RequireAuth>
-        } />
+        } /> */}
         <Route path="/shipping" element={
           <RequireAuth>
             <Shipping />
