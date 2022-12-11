@@ -1,3 +1,3 @@
-const api = 'http://localhost:8000';
+const api = 'https://rokomaribook-store-backend-production.up.railway.app';
 
 export default api;
