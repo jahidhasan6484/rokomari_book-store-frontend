@@ -1,8 +1,7 @@
 # https://rokomari-jahid.netlify.app
-# https://rokomari-bcf14.web.app/
 
-Rokomari_Book Store (Both Link are aailable now)
+Rokomari_Book Store
 
-For Admin:
+For Admin Access:
 Email: jahid15-12482@diu.edu.bd
 Password: Admin@123
